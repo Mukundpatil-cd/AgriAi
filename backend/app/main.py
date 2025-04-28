@@ -4,6 +4,9 @@ from sqlalchemy.orm import Session
 import logging
 
 from .database import get_db, save_crop_prediction, CropPrediction
+from app.models.disease_model import DiseaseModel  # Absolute import
+
+
 
 # FastAPI instance
 app = FastAPI()
