@@ -3,11 +3,22 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from datetime import datetime
 
+
 # 🔧 DB Setup
 SQLALCHEMY_DATABASE_URL = "mysql+pymysql://Mukund:1605@localhost/agriai"
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+
+class DiseaseLog(Base):
+    __tablename__ = "disease_logs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    # Matching the actual database schema
+    image_name = Column(String(255), nullable=False)
+    predicted_class = Column(String(100), nullable=False)  # This is what's actually in the database
+    timestamp = Column(DateTime, default=datetime.utcnow)
 
 # 📦 Crop Prediction Table
 class CropPrediction(Base):

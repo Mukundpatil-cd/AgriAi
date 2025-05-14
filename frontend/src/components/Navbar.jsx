@@ -1,13 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
+  const location = useLocation();
+  
+  const linkStyle = {
+    margin: '0 15px', 
+    color: 'white', 
+    textDecoration: 'none',
+    fontWeight: 500,
+    padding: '5px 10px',
+    borderRadius: '4px',
+    transition: 'background-color 0.2s'
+  };
+  
+  const activeLinkStyle = {
+    ...linkStyle,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    fontWeight: 700
+  };
+  
   return (
-    <nav style={{ padding: '10px', background: '#eee' }}>
-      <Link to="/" style={{ margin: '0 10px' }}>Home</Link>
-      <Link to="/crop" style={{ margin: '0 10px' }}>Crop</Link>
-      <Link to="/disease" style={{ margin: '0 10px' }}>Disease</Link>
-      <Link to="/chat" style={{ margin: '0 10px' }}>ChatBot</Link>
+    <nav>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>🌿 AgriAI</div>
+        <div>
+          <Link to="/" style={location.pathname === '/' ? activeLinkStyle : linkStyle}>Home</Link>
+          <Link to="/crop" style={location.pathname === '/crop' ? activeLinkStyle : linkStyle}>Crop</Link>
+          <Link to="/disease" style={location.pathname === '/disease' ? activeLinkStyle : linkStyle}>Disease</Link>
+          <Link to="/chat" style={location.pathname === '/chat' ? activeLinkStyle : linkStyle}>Chat</Link>
+        </div>
+      </div>
     </nav>
   );
 };
